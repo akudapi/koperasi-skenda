@@ -6,7 +6,7 @@
         <div class="container-pkks" style="font-family: 'Poppins'; ">
 
             <div class="title">
-                <h2>Dashboard</h2>                
+                <h2>Table Data User</h2>                
             </div>
             <div class="hr-3">
                 <hr>
