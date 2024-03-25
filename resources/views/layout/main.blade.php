@@ -32,6 +32,14 @@
       </li>
     </ul>
 
+    <ul class="navbar-nav ml-auto mr-2">
+      <li>
+        <li>
+          <p>{{ Auth::user()->level }}</p>
+        </li>
+      </li>
+    </ul>
+
   </nav>
 
   {{-- SIDEBAR --}}
@@ -69,10 +77,10 @@
         
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="{{ route('admin.dashboard') }}" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt" style="color: #ffffff;"></i>
+            <a href="{{ route('admin.produk') }}" class="nav-link">
+              <i class="nav-icon fa-solid fa-table" style="color: #ffffff;"></i>
               <p class="poppins paraf">
-                Perlengkapan Sekolah
+                Data Produk
               </p>
             </a>
           </li>
@@ -80,10 +88,10 @@
         
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="{{ route('admin.dashboard') }}" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt" style="color: #ffffff;"></i>
+            <a href="{{ route('admin.penjualan') }}" class="nav-link">
+              <i class="nav-icon fa-solid fa-table" style="color: #ffffff;"></i>
               <p class="poppins paraf">
-                Alat Tulis
+                Data Penjualan
               </p>
             </a>
           </li>

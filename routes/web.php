@@ -36,5 +36,11 @@ Route::group(['prefix' => 'admin','middleware' => ['auth'], 'as' => 'admin.'] , 
     Route::get('/userEdit/{id}', [UserController::class, 'useredit'])->name('user.edit');
     Route::put('/userUpdate/{id}', [UserController::class, 'userupdate'])->name('user.update');
     Route::delete('/userDelete/{id}', [UserController::class, 'userdelete'])->name('user.delete');
+
+    Route::get('/produk',[HomeController::class,'produk'])->name('produk');
+    // Route::get('/create',[HomeController::class,'create'])->name('user.create');
+    // Route::post('/store',[HomeController::class,'store'])->name('user.store');
+
+    Route::get('/penjualan',[HomeController::class,'penjualan'])->name('penjualan');
     
 });

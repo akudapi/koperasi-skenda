@@ -19,7 +19,6 @@ return new class extends Migration
             $table->enum('jenisProduk', ['aksesoris','alatTulis','seragam']);
             $table->integer('hargaProduk');
             $table->string('gambarProduk', 250);
-            $table->string('deskripsiProduk', 250);
             $table->timestamps();
         });
     }

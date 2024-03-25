@@ -16,7 +16,7 @@
 
             <div class="card-welcome">
                 <div class="card-1">
-                    <h4>Selamat Datang<span style="color: cyan">{{ Auth::user()->name }}</span></h4>
+                    <h4>Selamat Datang <span style="color: cyan">{{ Auth::user()->name }}</span></h4>
                 </div>
                 <div class="card-2">
                     <p>Website Pembukuan Penjualan Koperasi Sekolah Menengah Kejuruan Negeri 2 Banjarmasin</p>
@@ -51,9 +51,9 @@
                     <div class="icon-activity">
                         <img src="{{ asset('image/folder.png') }}" alt="user">
                     </div>
-                    <h2>Data Penjualan Perlengkapan Sekolah</h2>
+                    <h2>Data Produk</h2>
                     <div class="button-activity">
-                        <a href="{{ route('admin.dashboard') }}">Buka</a>
+                        <a href="{{ route('admin.produk') }}">Buka</a>
                     </div>
                 </div>
 
@@ -61,13 +61,13 @@
                     <div class="icon-activity">
                         <img src="{{ asset('image/folder.png') }}" alt="user">
                     </div>
-                    <h2>Data Penjualan Alat Tulis</h2>
+                    <h2>Data Penjualan</h2>
                     <div class="button-activity">
-                        <a href="{{ route('admin.dashboard') }}">Buka</a>
+                        <a href="{{ route('admin.penjualan') }}">Buka</a>
                     </div>
                 </div>
 
-                <div class="card-activity">
+                {{-- <div class="card-activity">
                     <div class="icon-activity">
                         <img src="{{ asset('image/folder.png') }}" alt="user">
                     </div>
@@ -75,7 +75,7 @@
                     <div class="button-activity">
                         <a href="{{ route('admin.dashboard') }}">Buka</a>
                     </div>
-                </div>
+                </div> --}}
 
 
 
