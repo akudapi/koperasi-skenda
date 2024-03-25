@@ -1,0 +1,186 @@
+html,
+body,
+div,
+ul,
+ol,
+li,
+p,
+h1,
+h2,
+h3,
+h4 {
+    margin: 0;
+    padding: 0;
+    -webkit-margin-start: 0;
+    -webkit-padding-start: 0;
+}
+
+.poppins {
+    font-family: "Poppins", sans-serif;
+}
+
+.container-pkks {
+    padding: 30px 30px 30px 30px;
+}
+
+.title {
+    font-size: 22px;
+    padding-bottom: 10px;
+    font-family: "Poppins", sans-serif;
+}
+
+.hr {
+    display: grid;
+    grid-template-areas: "1 2";
+    grid-template-columns: 1.6fr 0.4fr;
+}
+
+.hr hr {
+    height: 2px;
+    width: 100%;
+    background-color: #333;
+}
+
+.hr-2 hr {
+    height: 2px;
+    width: 100%;
+    background-color: #333;
+    margin: 35px 0 0 0;
+}
+
+.hr-3 hr {
+    height: 2px;
+    width: 100%;
+    background-color: #333;
+}
+
+.card-welcome {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    position: relative;
+    height: 125px;
+    background-color: #68b2a0;
+    color: white;
+    border-radius: 15px;
+    margin: 20px 0 20px 0;
+    padding-left: 40px;
+}
+
+.card-1 {
+    font-size: 24px;
+    font-family: "Inter", sans-serif;
+}
+
+.card-2 {
+    font-size: 18px;
+}
+
+.image-card {
+    position: absolute;
+    width: 220px;
+    left: 90%;
+    bottom: 1px;
+    transform: translateX(-50%);
+}
+
+.title-2 {
+    font-size: 20px;
+    padding-bottom: 10px;
+    font-family: "Poppins", sans-serif;
+    margin: 25px 0 15px 0;
+}
+
+.main-activity {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.card-activity {
+    display: grid;
+    grid-template-areas: "1 2 3";
+    grid-template-columns: 0.1fr 7fr 1fr;
+    align-items: center;
+    border-radius: 15px;
+    background-color: #68b2a0;
+    color: white;
+    height: 80px;
+}
+
+.icon-activity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 60px;
+    height: 60px;
+    margin: 10px 50px 10px 20px;
+    border-radius: 10px;
+}
+
+.icon-activity i {
+    width: 70%;
+}
+
+.button-activity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 10px;
+    width: 140px;
+    height: 40px;
+    margin-right: 20px;
+}
+
+.button-activity a {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Inter", sans-serif;
+    color: #68b2a0;
+}
+
+.user-button {
+    margin: 50px 0 30px 0;
+}
+
+.tambah {
+    background-color: #68b2a0;
+    border: none;
+    border-radius: 5px;
+    width: 150px;
+    height: 40px;
+}
+
+.tambah a {
+    color: white;
+    font-family: "Poppins";
+    font-size: 18px;
+}
+
+.form-user {
+    background-color: white;
+    border-radius: 10px;
+    height: 500px;
+}
+
+.card-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px 10px 0 0;
+    background-color: #68b2a0;
+    height: 60px;
+    margin-top: 40px;
+}
+
+.card-user p {
+    color: white;
+    font-size: 20px;
+}
+
+.form-pad {
+    padding: 30px 50px 50px 50px;
+}
