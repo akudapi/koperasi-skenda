@@ -16,7 +16,7 @@
 
             <div class="card-welcome">
                 <div class="card-1">
-                    <h4>Selamat Datang <span style="color: cyan">{{ Auth::user()->name }}</span></h4>
+                    <h4>Selamat Datang<span style="color: cyan">{{ Auth::user()->name }}</span></h4>
                 </div>
                 <div class="card-2">
                     <p>Website Pembukuan Penjualan Koperasi Sekolah Menengah Kejuruan Negeri 2 Banjarmasin</p>
