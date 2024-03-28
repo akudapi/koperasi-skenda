@@ -15,36 +15,84 @@
                     <button class="tambah"><a href="">Tambah Data</a></button>
                 </div>
             </div>
-            <div class="hr-3">
+            <div class="hr-3 mb-5">
                 <hr>
             </div>
 
-            <main class="main-activity poppins">
+            <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Table Produk</h3>
+        
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <div class="input-group-append">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                <table border="none" class="text-center bg-white mt-5">
-                    <thead style="font-size: 20px;">
-                        <tr>
-                            <th class="py-3">No</th>
-                            <th>Nama Produk</th>
-                            <th>Jenis Produk</th>
-                            <th>Harga Produk</th>
-                            <th>Gambar Produk</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data as $d)
-                            <tr style="font-size: 20px;">
-                                <td class="py-3">{{ $loop->iteration }}</td>
-                                <td class="col-6">{{ $d->namaProduk }}</td>
-                                <td class="col-2">{{ $d->jenisProduk }}</td>
-                                <td class="col-2">{{ $d->hargaProduk }}</td>
-                                <td style="width: 200px"><img src="{{ asset('image/'.$d->gambarProduk) }}" style="width: 200px" alt="FOTO PRODUK"></td>
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover poppins">
+
+                        <thead>
+                            <tr style="font-size: 20px">
+                                <th style="width: 150px; text-align: center;">Id Produk</th>
+                                <th>Nama Produk</th>
+                                <th style="text-align: center;">Jenis Produk</th>
+                                <th style="text-align: center;">Harga Produk</th>
+                                <th style="text-align: center;">Gambar Produk</th>
+                                <th style="width: 200px; text-align: center;">Action</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
 
-            </main>
+                        @foreach ($data as $d)
+                        <tr>
+                            <td style="text-align: center">{{ $d->idProduk }}</td>
+                            <td>{{ $d->namaProduk }}</td>
+                            <td style="text-align: center;">{{ $d->jenisProduk }}</td>
+                            <td style="text-align: center;">{{ $d->hargaProduk }}</td>
+                            <td style="text-align: center;">{{ $d->gambarProduk }}</td>
+                            <td>
+                                {{-- {{ route('admin.user.edit',['id' => $d->id]) }} --}}
+                                <a href="" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a>
+                                <a data-toggle="modal" data-target="#modal-hapus{{ $d->id }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus</a>
+                            </td>
+                        </tr>
+                        <div class="modal fade" id="modal-hapus{{ $d->id }}">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h4 class="modal-title">Default Modal</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                <p>Apakah kamu yakin ingin menghapus data user <b>{{ $d->name }}</b></p>
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                    {{-- {{ route('admin.user.delete',['id' => $d->id]) }} --}}
+                                <form action="" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Ya, Hapus data</button>  
+                                </form>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        @endforeach
+
+                        </table>
+                    </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 

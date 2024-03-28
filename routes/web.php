@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,20 +29,22 @@ Route::post('/register-proses',[LoginController::class,'register_proses'])->name
 
 Route::group(['prefix' => 'admin','middleware' => ['auth'], 'as' => 'admin.'] , function(){
 
+    // ROUTE DASHBOARD/HOME/HALAMAN AWAL
     Route::get('/dashboard',[HomeController::class,'dashboard'])->name('dashboard');
 
+    // ROUTE UNTUK USER
     Route::get('/user',[UserController::class,'user'])->name('user');
     Route::get('/userCreate',[UserController::class,'usercreate'])->name('user.create');
     Route::post('/userStore',[UserController::class,'userstore'])->name('user.store');
-
     Route::get('/userEdit/{id}', [UserController::class, 'useredit'])->name('user.edit');
     Route::put('/userUpdate/{id}', [UserController::class, 'userupdate'])->name('user.update');
     Route::delete('/userDelete/{id}', [UserController::class, 'userdelete'])->name('user.delete');
 
-    Route::get('/produk',[HomeController::class,'produk'])->name('produk');
-    // Route::get('/create',[HomeController::class,'create'])->name('user.create');
+    // ROUTE UNTUK PRODUK
+    Route::get('/produk',[ProdukController::class,'produk'])->name('produk');
+    Route::get('/produk.create',[ProdukController::class,'produkcreate'])->name('produk.create');
     // Route::post('/store',[HomeController::class,'store'])->name('user.store');
 
-    Route::get('/penjualan',[HomeController::class,'penjualan'])->name('penjualan');
+    Route::get('/penjualan',[PenjualanController::class,'penjualan'])->name('penjualan');
     
 });

@@ -5,16 +5,17 @@
 
         <div class="container-pkks" style="font-family: 'Poppins'; ">
 
-            <div class="title">
-                <h2>Table Data User</h2>                
+          <div class="title d-flex flex-row">
+            <div>
+                <h2><span class="mr-4"><i class="fa-solid fa-cart-shopping"></i></span>Table Data User</h2>
             </div>
-            <div class="hr-3">
-                <hr>
-            </div>
-
-            <div class="user-button">
+            <div class="ml-auto">
                 <button class="tambah"><a href="{{ route('admin.user.create') }}">Tambah User</a></button>
             </div>
+          </div>
+          <div class="hr-3 mb-5">
+              <hr>
+          </div>
 
             <div class="row">
                 <div class="col-12">
@@ -31,31 +32,34 @@
                     </div>
 
                     <div class="card-body table-responsive p-0">
-                      <table class="table table-hover">
+                      <table class="table table-hover poppins">
 
                         <thead>
-                          <tr>
-                            <th>No</th>
-                            <th>Id</th>
+                          <tr style="font-size: 20px">
+                            <th style="width: 50px; text-align: center;">No</th>
+                            <th style="text-align: center;">Id</th>
                             <th>User</th>
                             <th>Email</th>
-                            <th>Level</th>
-                            <th>Action</th>
+                            <th style="width: 100px; text-align: center;">Level</th>
+                            <th style="width: 200px; text-align: center;">Action</th>
                           </tr>
                         </thead>
 
                         @foreach ($data as $d)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $d->id }}</td>
-                            <td>{{ $d->name }}</td>
-                            <td>{{ $d->email }}</td>
-                            <td>{{ $d->level }}</td>
-                            <td>
-                                <a href="{{ route('admin.user.edit',['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a>
-                                <a data-toggle="modal" data-target="#modal-hapus{{ $d->id }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus</a>
-                            </td>
-                        </tr>
+                        <tbody>
+                            <tr style="font-size: 20px">
+                              <td style="text-align: center">{{ $loop->iteration }}</td>
+                              <td style="text-align: center">{{ $d->id }}</td>
+                              <td>{{ $d->name }}</td>
+                              <td>{{ $d->email }}</td>
+                              <td style="text-align: center;">{{ $d->level }}</td>
+                              <td>
+                                  <a href="{{ route('admin.user.edit',['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a>
+                                  <a data-toggle="modal" data-target="#modal-hapus{{ $d->id }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus</a>
+                              </td>
+                            </tr>
+                        </tbody>
+
                         <div class="modal fade" id="modal-hapus{{ $d->id }}">
                           <div class="modal-dialog">
                             <div class="modal-content">
@@ -81,7 +85,7 @@
                           </div>
                           <!-- /.modal-dialog -->
                         </div>
-                    @endforeach
+                        @endforeach
 
                       </table>
                     </div>

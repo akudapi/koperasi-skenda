@@ -13,14 +13,6 @@ class HomeController extends Controller
         return view('index');
     }
 
-    public function produk(){
-        
-        $data = Tb_Produk::get();
-
-        return view('produk', compact('data'));
-        
-    }
-
     public function penjualan(){
         
         $data = Tb_Penjualan::get();
