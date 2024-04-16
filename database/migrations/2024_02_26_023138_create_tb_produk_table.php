@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tb_produk', function (Blueprint $table) {
-            $table->integer('idProduk')->primary();
+            $table->id('id');
+            $table->text('idProduk');
             $table->string('namaProduk', 250);
-            $table->enum('jenisProduk', ['aksesoris','alatTulis','seragam']);
+            $table->enum('jenisProduk', ['Aksesoris','Alat Tulis','Seragam']);
             $table->integer('hargaProduk');
             $table->string('gambarProduk', 250);
             $table->timestamps();

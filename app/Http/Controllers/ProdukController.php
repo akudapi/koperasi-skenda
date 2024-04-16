@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tb_Produk;
+use App\Helpers\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -24,6 +25,8 @@ class ProdukController extends Controller
         return view('produkCreate',compact('data'));
     }
 
+
+
     public function produkstore(Request $request){
         $validator = Validator::make($request->all(),[
             'namaProduk'        => 'required',
@@ -39,6 +42,11 @@ class ProdukController extends Controller
 
         Storage::disk('public')->put($path,file_get_contents($photo));
 
+        //  Helper::IDGenerator(new ProdukController, 'idProduk', 5, 'PRDK');
+
+        $idProduk = Helper::IDGenerator(new Tb_Produk, 'idProduk', 3, 'PRD');
+
+        $data['idProduk']           = $idProduk;
         $data['namaProduk']         = $request->namaProduk;
         $data['jenisProduk']        = $request->jenisProduk;
         $data['hargaProduk']        = $request->hargaProduk;

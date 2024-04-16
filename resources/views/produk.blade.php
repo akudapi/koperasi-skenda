@@ -36,24 +36,24 @@
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover poppins">
 
-                        <thead>
+                        <thead class="text-center">
                             <tr style="font-size: 20px">
                                 <th style="width: 150px; text-align: center;">Id Produk</th>
                                 <th>Nama Produk</th>
-                                <th style="text-align: center;">Jenis Produk</th>
-                                <th style="text-align: center;">Harga Produk</th>
-                                <th style="text-align: center;">Gambar Produk</th>
+                                <th>Jenis Produk</th>
+                                <th>Harga Produk</th>
+                                <th>Gambar Produk</th>
                                 <th style="width: 200px; text-align: center;">Action</th>
                             </tr>
                         </thead>
 
                         @foreach ($data as $d)
-                        <tr>
-                            <td style="text-align: center">{{ $d->idProduk }}</td>
+                        <tr class="font-table text-center">
+                            <td>{{ $d->idProduk }}</td>
                             <td>{{ $d->namaProduk }}</td>
-                            <td style="text-align: center;">{{ $d->jenisProduk }}</td>
-                            <td style="text-align: center;">{{ $d->hargaProduk }}</td>
-                            <td style="text-align: center;">{{ $d->gambarProduk }}</td>
+                            <td>{{ $d->jenisProduk }}</td>
+                            <td>{{ $d->hargaProduk }}</td>
+                            <td><img src="{{ asset('storage/photo-user/'.$d->gambarProduk ) }}" alt="GAMBAR PRODUK" style="width: 100px;"></td>
                             <td>
                                 {{-- {{ route('admin.user.edit',['id' => $d->id]) }} --}}
                                 <a href="" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a>

@@ -14,14 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tb_penjualan', function (Blueprint $table) {
-            $table->integer('idPenjualan')->primary();
-            $table->integer('idProduk');
+            $table->id('idPenjualan');
+            $table->text('idProduk');
             $table->string('namaProduk', 250);
             $table->integer('penjualan');
             $table->timestamps();
 
             //relation untuk idProduk di table tb_produk
-            $table->foreign('idProduk')->references('idProduk')->on('tb_produk')->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreign('idProduk')->references('idProduk')->on('tb_produk')->onUpdate('cascade')->onDelete('cascade');
         });        
     }
 

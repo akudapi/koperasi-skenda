@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\TestingHelperController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 

@@ -32,9 +32,9 @@
                 <div class="form-group">
                     <label for="jenisProduk">Jenis Produk :</label>
                     <select class="form-control" name="jenisProduk">
-                        <option value="aksesoris">Aksesoris</option>
-                        <option value="alatTulis">Alat Tulis</option>
-                        <option value="seragam">Seragam</option>
+                        <option value="Aksesoris">Aksesoris</option>
+                        <option value="Alat Tulis">Alat Tulis</option>
+                        <option value="Seragam">Seragam</option>
                     </select>
                 </div> 
 
