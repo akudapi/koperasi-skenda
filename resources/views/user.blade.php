@@ -34,22 +34,20 @@
                     <div class="card-body table-responsive p-0">
                       <table class="table table-hover poppins">
 
-                        <thead>
-                          <tr style="font-size: 20px">
-                            <th style="width: 50px; text-align: center;">No</th>
-                            <th style="text-align: center;">Id</th>
+                        <thead class="font-table text-center">
+                          <tr>
+                            <th>No (Id User)</th>
                             <th>User</th>
                             <th>Email</th>
-                            <th style="width: 100px; text-align: center;">Level</th>
-                            <th style="width: 200px; text-align: center;">Action</th>
+                            <th>Level</th>
+                            <th style="width: 250px;">Action</th>
                           </tr>
                         </thead>
 
                         @foreach ($data as $d)
-                        <tbody>
-                            <tr style="font-size: 20px">
-                              <td style="text-align: center">{{ $loop->iteration }}</td>
-                              <td style="text-align: center">{{ $d->id }}</td>
+                        <tbody class="font-table text-center">
+                            <tr>
+                              <td>{{ $loop->iteration }} ({{ $d->id }})</td>
                               <td>{{ $d->name }}</td>
                               <td>{{ $d->email }}</td>
                               <td style="text-align: center;">{{ $d->level }}</td>

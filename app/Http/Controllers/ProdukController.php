@@ -30,6 +30,7 @@ class ProdukController extends Controller
     public function produkstore(Request $request){
         $validator = Validator::make($request->all(),[
             'namaProduk'        => 'required',
+            'jenisProduk'       => 'required|in:Aksesoris,Alat Tulis,Seragam',
             'hargaProduk'       => 'required',
             'gambarProduk'      => 'required|mimes:png,jpg,jpeg|max:2048',
         ]);
@@ -57,37 +58,46 @@ class ProdukController extends Controller
         return redirect()->route('admin.produk');
     }
 
-    public function edit(Request $request, $id){
+    public function produkedit(Request $request, $id){
         $data = Tb_Produk::find($id);
 
-        return view('edit',compact('data'));
+        return view('produkEdit',compact('data'));
     }
 
-    public function update(Request $request, $id){
+    public function produkupdate(Request $request, $id){
         $validator = Validator::make($request->all(),[
-            'email'     => 'required|email',
-            'nama'      => 'required',
-            'password'  => 'nullable',
+            'namaProduk'        => 'required',
+            'jenisProduk'       => 'required|in:Aksesoris,Alat Tulis,Seragam',
+            'hargaProduk'       => 'required',
+            'gambarProduk'      => 'required|mimes:png,jpg,jpeg|max:2048',
         ]);
 
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+
+        $photo      = $request->file('gambarProduk');
+        $filename   = date('Y-m-D').$photo->getClientOriginalName();
+        $path       = 'photo-user/'.$filename;
+
+        Storage::disk('public')->put($path,file_get_contents($photo));
         
-        $data['email']      = $request->email;
-        $data['name']       = $request->nama;
+        $data['namaProduk']         = $request->namaProduk;
+        $data['jenisProduk']        = $request->jenisProduk;
+        $data['hargaProduk']        = $request->hargaProduk;
+        $data['gambarProduk']       = $filename;
 
         Tb_Produk::whereId($id)->update($data);
 
-        return redirect()->route('index');
+        return redirect()->route('admin.produk');
     }
 
-    public function delete(Request $request, $id){
+    public function produkdelete(Request $request, $id){
         $data = Tb_Produk::find($id);
 
         if ($data) {
             $data ->delete();
         }
 
-        return redirect()->route('index');
+        return redirect()->route('admin.produk');
     }
 
 }

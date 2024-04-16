@@ -36,14 +36,14 @@
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover poppins">
 
-                        <thead class="text-center">
+                        <thead class="font-table text-center">
                             <tr style="font-size: 20px">
                                 <th style="width: 150px; text-align: center;">Id Produk</th>
                                 <th>Nama Produk</th>
                                 <th>Jenis Produk</th>
                                 <th>Harga Produk</th>
                                 <th>Gambar Produk</th>
-                                <th style="width: 200px; text-align: center;">Action</th>
+                                <th style="width: 250px; text-align: center;">Action</th>
                             </tr>
                         </thead>
 
@@ -55,8 +55,8 @@
                             <td>{{ $d->hargaProduk }}</td>
                             <td><img src="{{ asset('storage/photo-user/'.$d->gambarProduk ) }}" alt="GAMBAR PRODUK" style="width: 100px;"></td>
                             <td>
-                                {{-- {{ route('admin.user.edit',['id' => $d->id]) }} --}}
-                                <a href="" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a>
+                                {{--  --}}
+                                <a href="{{ route('admin.produk.edit',['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a>
                                 <a data-toggle="modal" data-target="#modal-hapus{{ $d->id }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus</a>
                             </td>
                         </tr>
@@ -73,8 +73,8 @@
                                 <p>Apakah kamu yakin ingin menghapus data produk <b>{{ $d->namaProduk }}</b></p>
                                 </div>
                                 <div class="modal-footer justify-content-between">
-                                    {{-- {{ route('admin.user.delete',['id' => $d->id]) }} --}}
-                                <form action="" method="post">
+                                    {{--  --}}
+                                <form action="{{ route('admin.produk.delete',['id' => $d->id]) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

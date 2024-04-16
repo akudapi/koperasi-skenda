@@ -32,10 +32,14 @@
                 <div class="form-group">
                     <label for="jenisProduk">Jenis Produk :</label>
                     <select class="form-control" name="jenisProduk">
+                        <option value="#" selected>Pilih Jenis Produk</option>
                         <option value="Aksesoris">Aksesoris</option>
                         <option value="Alat Tulis">Alat Tulis</option>
                         <option value="Seragam">Seragam</option>
                     </select>
+                    @error('jenisProduk')
+                    <small>{{ $message }}</small>
+                    @enderror
                 </div> 
 
                 <div class="form-group">
