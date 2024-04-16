@@ -12,7 +12,7 @@
                     <h2><span class="mr-4"><i class="fa-solid fa-cart-shopping"></i></span>Table Data Produk Koperasi</h2>
                 </div>
                 <div class="ml-auto">
-                    <button class="tambah"><a href="">Tambah Data</a></button>
+                    <button class="tambah"><a href="{{ route("admin.produk.create") }}">Tambah Data</a></button>
                 </div>
             </div>
             <div class="hr-3 mb-5">
@@ -70,7 +70,7 @@
                                 </button>
                                 </div>
                                 <div class="modal-body">
-                                <p>Apakah kamu yakin ingin menghapus data user <b>{{ $d->name }}</b></p>
+                                <p>Apakah kamu yakin ingin menghapus data produk <b>{{ $d->namaProduk }}</b></p>
                                 </div>
                                 <div class="modal-footer justify-content-between">
                                     {{-- {{ route('admin.user.delete',['id' => $d->id]) }} --}}

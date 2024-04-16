@@ -12,10 +12,10 @@ class Tb_Produk extends Model
     protected $table = "tb_produk";
 
     protected $fillable = [
+        "idProduk",
         "namaProduk",
         "jenisProduk",
         "hargaProduk",
         "gambarProduk",
-        "deskripsiProduk",
     ];
 }

@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth'], 'as' => 'admin.'] , 
     // ROUTE UNTUK PRODUK
     Route::get('/produk',[ProdukController::class,'produk'])->name('produk');
     Route::get('/produk.create',[ProdukController::class,'produkcreate'])->name('produk.create');
-    // Route::post('/store',[HomeController::class,'store'])->name('user.store');
+    Route::post('/produk.store',[ProdukController::class,'produkstore'])->name('produk.store');
 
     Route::get('/penjualan',[PenjualanController::class,'penjualan'])->name('penjualan');
     

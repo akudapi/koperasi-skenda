@@ -137,12 +137,8 @@
                 @enderror
 
                 <div class="side-input">
-                    <div class="icheck-primary">
-                        <input type="checkbox" id="remember" />
-                        <label for="remember"> Remember </label>
-                    </div>
                     <div>
-                        <a href="{{ route('register') }}">Register</a>
+                        <p>Belum punya akun? <a href="{{ route('register') }}">Register</a></p>
                     </div>
                 </div>
 

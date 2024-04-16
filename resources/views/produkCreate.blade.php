@@ -12,7 +12,7 @@
             <hr>
         </div>
 
-        <form class="form-user" action="{{ route('admin.user.store') }}" method="post">
+        <form class="form-user" action="{{ route('admin.produk.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="card-user">
                 <p>Form Tambah Data User</p>
@@ -22,38 +22,36 @@
             <div class="form-pad">
 
                 <div class="form-group">
-                    <label for="name">Nama :</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Masukan Nama">
-                        @error('name')
+                    <label for="namaProduk">Nama Produk:</label>
+                    <input type="text" class="form-control" id="namaProduk" name="namaProduk" placeholder="Masukan Nama Produk">
+                        @error('namaProduk')
                         <small>{{ $message }}</small>
                         @enderror
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email :</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Masukan email">
-                        @error('email')
-                        <small>{{ $message }}</small>
-                        @enderror
-                </div>
-
-                <div class="form-group">
-                    <label for="level">Level :</label>
-                    <select class="form-control" name="level">
-                        <option value="admin">Admin</option>
-                        <option value="user" selected>User</option>
+                    <label for="jenisProduk">Jenis Produk :</label>
+                    <select class="form-control" name="jenisProduk">
+                        <option value="aksesoris">Aksesoris</option>
+                        <option value="alatTulis">Alat Tulis</option>
+                        <option value="seragam">Seragam</option>
                     </select>
-                        @error('level')
-                        <small>{{ $message }}</small>
-                        @enderror
                 </div> 
 
                 <div class="form-group">
-                    <label for="password">Password :</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Masukan Password">
-                        @error('password')
+                    <label for="hargaProduk">Harga Produk :</label>
+                    <input type="number" class="form-control" id="hargaProduk" name="hargaProduk" placeholder="Masukan Harga Produk">
+                        @error('hargaProduk')
                         <small>{{ $message }}</small>
                         @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="gambarProduk">Gambar Produk :</label>
+                    <input type="file" class="form-control" id="gambarProduk" name="gambarProduk">
+                      @error('gambarProduk')
+                          <small>{{ $message }}</small>
+                      @enderror
                 </div>
 
                 <div>
