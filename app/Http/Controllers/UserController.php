@@ -36,7 +36,7 @@ class UserController extends Controller
 
         User::create($data);
 
-        return redirect()->route('admin.user');
+        return redirect()->route('user');
     }
 
     public function useredit(Request $request, $id){
@@ -67,7 +67,7 @@ class UserController extends Controller
 
         User::whereId($id)->update($data);
 
-        return redirect()->route('admin.user');
+        return redirect()->route('user');
     }
 
     public function userdelete(Request $request, $id){
@@ -77,6 +77,6 @@ class UserController extends Controller
             $data ->delete();
         }
 
-        return redirect()->route('admin.user');
+        return redirect()->route('user');
     }
 }

@@ -55,7 +55,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="{{ route('admin.dashboard') }}" class="nav-link">
+            <a href="{{ route('dashboard') }}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt" style="color: #ffffff;"></i>
               <p class="poppins paraf">
                 Dashboard
@@ -66,7 +66,7 @@
         
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="{{ route('admin.user') }}" class="nav-link">
+            <a href="{{ route('user') }}" class="nav-link">
               <i class="nav-icon fa-solid fa-user" style="color: #ffffff;"></i>
               <p class="poppins paraf">
                 Data User
@@ -77,7 +77,7 @@
         
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="{{ route('admin.produk') }}" class="nav-link">
+            <a href="{{ route('produk') }}" class="nav-link">
               <i class="nav-icon fa-solid fa-table" style="color: #ffffff;"></i>
               <p class="poppins paraf">
                 Data Produk
@@ -88,7 +88,7 @@
         
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="{{ route('admin.penjualan') }}" class="nav-link">
+            <a href="{{ route('penjualan') }}" class="nav-link">
               <i class="nav-icon fa-solid fa-table" style="color: #ffffff;"></i>
               <p class="poppins paraf">
                 Data Penjualan

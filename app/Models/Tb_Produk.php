@@ -16,6 +16,12 @@ class Tb_Produk extends Model
         "namaProduk",
         "jenisProduk",
         "hargaProduk",
+        "stokProduk",
         "gambarProduk",
     ];
+
+    public function penjualan()
+    {
+        return $this->hasOne(Tb_Penjualan::class,  'idProduk', 'idProduk');
+    }    
 }

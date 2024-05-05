@@ -43,7 +43,7 @@
                     </div>
                     <h2>Data User</h2>
                     <div class="button-activity">
-                        <a href="{{ route('admin.user') }}">Buka</a>
+                        <a href="{{ route('user') }}">Buka</a>
                     </div>
                 </div>
 
@@ -53,7 +53,7 @@
                     </div>
                     <h2>Data Produk</h2>
                     <div class="button-activity">
-                        <a href="{{ route('admin.produk') }}">Buka</a>
+                        <a href="{{ route('produk') }}">Buka</a>
                     </div>
                 </div>
 
@@ -63,7 +63,7 @@
                     </div>
                     <h2>Data Penjualan</h2>
                     <div class="button-activity">
-                        <a href="{{ route('admin.penjualan') }}">Buka</a>
+                        <a href="{{ route('penjualan') }}">Buka</a>
                     </div>
                 </div>
 

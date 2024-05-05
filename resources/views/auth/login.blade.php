@@ -143,10 +143,9 @@
                 </div>
 
                 <div class="btn">
-                    <button type="submit">
-                      Sign In
-                    </button>
+                    <button type="submit" style="cursor: pointer">Submit</button>
                 </div>
+
 
             </form>
             

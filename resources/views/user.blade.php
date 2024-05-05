@@ -10,7 +10,7 @@
                 <h2><span class="mr-4"><i class="fa-solid fa-cart-shopping"></i></span>Table Data User</h2>
             </div>
             <div class="ml-auto">
-                <button class="tambah"><a href="{{ route('admin.user.create') }}">Tambah User</a></button>
+                <button class="tambah"><a href="{{ route('user.create') }}">Tambah User</a></button>
             </div>
           </div>
           <div class="hr-3 mb-5">
@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="card-body table-responsive p-0">
-                      <table class="table table-hover poppins">
+                      <table border="1 solid gray" class="table table-hover poppins">
 
                         <thead class="font-table text-center">
                           <tr>
@@ -40,19 +40,19 @@
                             <th>User</th>
                             <th>Email</th>
                             <th>Level</th>
-                            <th style="width: 250px;">Action</th>
+                            <th style="width: 200px;">Action</th>
                           </tr>
                         </thead>
 
                         @foreach ($data as $d)
                         <tbody class="font-table text-center">
-                            <tr>
+                            <tr class="flex-center">
                               <td>{{ $loop->iteration }} ({{ $d->id }})</td>
                               <td>{{ $d->name }}</td>
                               <td>{{ $d->email }}</td>
                               <td style="text-align: center;">{{ $d->level }}</td>
                               <td>
-                                  <a href="{{ route('admin.user.edit',['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a>
+                                  <a href="{{ route('user.edit',['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a>
                                   <a data-toggle="modal" data-target="#modal-hapus{{ $d->id }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus</a>
                               </td>
                             </tr>
@@ -71,7 +71,7 @@
                                 <p>Apakah kamu yakin ingin menghapus data user <b>{{ $d->name }}</b></p>
                               </div>
                               <div class="modal-footer justify-content-between">
-                                <form action="{{ route('admin.user.delete',['id' => $d->id]) }}" method="post">
+                                <form action="{{ route('user.delete',['id' => $d->id]) }}" method="post">
                                   @csrf
                                   @method('delete')
                                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

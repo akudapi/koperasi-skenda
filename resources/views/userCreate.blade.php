@@ -12,7 +12,7 @@
             <hr>
         </div>
 
-        <form class="form-user" action="{{ route('admin.user.store') }}" method="post">
+        <form class="form-data" action="{{ route('user.store') }}" method="post">
             @csrf
             <div class="card-user">
                 <p>Form Tambah Data User</p>

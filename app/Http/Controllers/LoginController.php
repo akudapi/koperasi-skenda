@@ -29,7 +29,7 @@ class LoginController extends Controller
         ];
 
        if( Auth::attempt($data)){
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('dashboard');
        }else{
         return redirect()->route('login')->with('failed', 'Email atau Password anda salah');
        }
@@ -59,7 +59,7 @@ class LoginController extends Controller
         ];
 
         if(Auth::attempt($login)){
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('dashboard');
         }else{
             return redirect()->route('login')->with('failed','Email atau Password Salah');
         }

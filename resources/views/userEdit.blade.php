@@ -6,17 +6,17 @@
     <div class="container-pkks" style="font-family: 'Poppins'; ">
 
         <div class="title">
-            <h2>Tambah Data User</h2>                
+            <h2>Edit Data User</h2>                
         </div>
         <div class="hr-3">
             <hr>
         </div>
 
-        <form class="form-user" action="{{ route('admin.user.update',['id' => $data->id]) }}" method="post">
+        <form class="form-data" action="{{ route('user.update',['id' => $data->id]) }}" method="post">
             @csrf
             @method('PUT')
             <div class="card-user">
-                <p>Form Tambah Data User</p>
+                <p>Form Edit Data User</p>
             </div>    
             
             <div class="form-pad">

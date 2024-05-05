@@ -12,7 +12,7 @@
                     <h2><span class="mr-4"><i class="fa-solid fa-cart-shopping"></i></span>Table Data Produk Koperasi</h2>
                 </div>
                 <div class="ml-auto">
-                    <button class="tambah"><a href="{{ route("admin.produk.create") }}">Tambah Data</a></button>
+                    <button class="tambah"><a href="{{ route("produk.create") }}">Tambah Data</a></button>
                 </div>
             </div>
             <div class="hr-3 mb-5">
@@ -34,32 +34,38 @@
                     </div>
 
                     <div class="card-body table-responsive p-0">
-                        <table class="table table-hover poppins">
+                        <table  border="1 solid gray" class="table table-hover poppins">
 
                         <thead class="font-table text-center">
-                            <tr style="font-size: 20px">
-                                <th style="width: 150px; text-align: center;">Id Produk</th>
+                            <tr>
+                                <th>No</th>
+                                <th style="width: 125px;">Id Produk</th>
                                 <th>Nama Produk</th>
                                 <th>Jenis Produk</th>
                                 <th>Harga Produk</th>
+                                <th>Stok Produk</th>
                                 <th>Gambar Produk</th>
-                                <th style="width: 250px; text-align: center;">Action</th>
+                                <th style="width: 200px;">Action</th>
                             </tr>
                         </thead>
 
                         @foreach ($data as $d)
-                        <tr class="font-table text-center">
-                            <td>{{ $d->idProduk }}</td>
-                            <td>{{ $d->namaProduk }}</td>
-                            <td>{{ $d->jenisProduk }}</td>
-                            <td>{{ $d->hargaProduk }}</td>
-                            <td><img src="{{ asset('storage/photo-user/'.$d->gambarProduk ) }}" alt="GAMBAR PRODUK" style="width: 100px;"></td>
-                            <td>
-                                {{--  --}}
-                                <a href="{{ route('admin.produk.edit',['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a>
-                                <a data-toggle="modal" data-target="#modal-hapus{{ $d->id }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus</a>
-                            </td>
-                        </tr>
+                        <tbody class="font-table text-center">
+                            <tr class="flex-center">
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $d->idProduk }}</td>
+                                <td>{{ $d->namaProduk }}</td>
+                                <td>{{ $d->jenisProduk }}</td>
+                                <td>Rp. {{ $d->hargaProduk }}</td>
+                                <td>{{ $d->stokProduk }}</td>
+                                <td><img src="{{ asset('storage/foto-produk/'.$d->gambarProduk ) }}" alt="GAMBAR PRODUK" style="width: 100px;"></td>
+                                <td>
+                                    <a href="{{ route('produk.edit',['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a>
+                                    <a data-toggle="modal" data-target="#modal-hapus{{ $d->id }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus</a>
+                                </td>
+                            </tr>                            
+                        </tbody>
+
                         <div class="modal fade" id="modal-hapus{{ $d->id }}">
                             <div class="modal-dialog">
                             <div class="modal-content">
@@ -74,7 +80,7 @@
                                 </div>
                                 <div class="modal-footer justify-content-between">
                                     {{--  --}}
-                                <form action="{{ route('admin.produk.delete',['id' => $d->id]) }}" method="post">
+                                <form action="{{ route('produk.delete',['id' => $d->id]) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -82,9 +88,9 @@
                                 </form>
                                 </div>
                             </div>
-                            <!-- /.modal-content -->
+                            
                             </div>
-                            <!-- /.modal-dialog -->
+                            
                         </div>
                         @endforeach
 

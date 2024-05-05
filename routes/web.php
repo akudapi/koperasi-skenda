@@ -20,15 +20,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',[LoginController::class,'index'])->name('login');
-Route::get('/login',[LoginController::class,'index'])->name('login');
-Route::post('/login-proses',[LoginController::class,'login_proses'])->name('login-proses');
-Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 
-Route::get('/register',[LoginController::class,'register'])->name('register');
-Route::post('/register-proses',[LoginController::class,'register_proses'])->name('register-proses');
+Route::middleware(['guest'])->group(function(){
+
+    Route::get('/login',[LoginController::class,'index'])->name('login');
+    Route::post('/login-proses',[LoginController::class,'login_proses'])->name('login-proses');
+
+    Route::get('/register',[LoginController::class,'register'])->name('register');
+    Route::post('/register-proses',[LoginController::class,'register_proses'])->name('register-proses');
+
+});
 
 
-Route::group(['prefix' => 'admin','middleware' => ['auth'], 'as' => 'admin.'] , function(){
+
+// Route::group(['prefix' => 'admin','middleware' => ['auth'], 'as' => 'admin.'] , function(){
+
+Route::middleware(['auth'])->group(function(){
 
     // ROUTE DASHBOARD/HOME/HALAMAN AWAL
     Route::get('/dashboard',[HomeController::class,'dashboard'])->name('dashboard');
@@ -50,5 +57,9 @@ Route::group(['prefix' => 'admin','middleware' => ['auth'], 'as' => 'admin.'] , 
     Route::delete('/produk/delete/{id}', [ProdukController::class, 'produkdelete'])->name('produk.delete');
 
     Route::get('/penjualan',[PenjualanController::class,'penjualan'])->name('penjualan');
-    
+    Route::post('/penjualan/terjual/{id}',[PenjualanController::class,'tambahterjual'])->name('penjualan.terjual');
+
+    // LOGOUT AKUN
+    Route::get('/logout',[LoginController::class,'logout'])->name('logout');
+
 });

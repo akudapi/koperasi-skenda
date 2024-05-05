@@ -6,16 +6,16 @@
     <div class="container-pkks" style="font-family: 'Poppins'; ">
 
         <div class="title">
-            <h2>Tambah Data User</h2>                
+            <h2>Tambah Data Produk</h2>                
         </div>
         <div class="hr-3">
             <hr>
         </div>
 
-        <form class="form-user" action="{{ route('admin.produk.store') }}" method="post" enctype="multipart/form-data">
+        <form class="form-data" action="{{ route('produk.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="card-user">
-                <p>Form Tambah Data User</p>
+                <p>Form Tambah Data Produk</p>
                 
             </div>    
             
@@ -46,6 +46,14 @@
                     <label for="hargaProduk">Harga Produk :</label>
                     <input type="number" class="form-control" id="hargaProduk" name="hargaProduk" placeholder="Masukan Harga Produk">
                         @error('hargaProduk')
+                        <small>{{ $message }}</small>
+                        @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="stokProduk">Stok Produk :</label>
+                    <input type="number" class="form-control" id="stokProduk" name="stokProduk" placeholder="Masukan Stok Produk">
+                        @error('stokProduk')
                         <small>{{ $message }}</small>
                         @enderror
                 </div>

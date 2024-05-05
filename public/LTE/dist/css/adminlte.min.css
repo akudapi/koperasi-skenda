@@ -1574,7 +1574,6 @@ pre code {
   color: #212529;
   background-color: transparent;
 }
-.table td,
 .table th {
   padding: 0.75rem;
   vertical-align: top;
@@ -35738,22 +35737,6 @@ html.maximized-card {
 .table.table-valign-middle thead > tr > td,
 .table.table-valign-middle thead > tr > th {
   vertical-align: middle;
-}
-.card-body.p-0 .table tbody > tr > td:first-of-type,
-.card-body.p-0 .table tbody > tr > th:first-of-type,
-.card-body.p-0 .table tfoot > tr > td:first-of-type,
-.card-body.p-0 .table tfoot > tr > th:first-of-type,
-.card-body.p-0 .table thead > tr > td:first-of-type,
-.card-body.p-0 .table thead > tr > th:first-of-type {
-  padding-left: 1.5rem;
-}
-.card-body.p-0 .table tbody > tr > td:last-of-type,
-.card-body.p-0 .table tbody > tr > th:last-of-type,
-.card-body.p-0 .table tfoot > tr > td:last-of-type,
-.card-body.p-0 .table tfoot > tr > th:last-of-type,
-.card-body.p-0 .table thead > tr > td:last-of-type,
-.card-body.p-0 .table thead > tr > th:last-of-type {
-  padding-right: 1.5rem;
 }
 .table-hover tbody tr.expandable-body:hover {
   background-color: inherit !important;

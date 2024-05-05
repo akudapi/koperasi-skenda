@@ -14,10 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tb_penjualan', function (Blueprint $table) {
-            $table->id('idPenjualan');
-            $table->text('idProduk');
-            $table->string('namaProduk', 250);
-            $table->integer('penjualan');
+            $table->id();
+            $table->integer('terjual');
             $table->timestamps();
 
             //relation untuk idProduk di table tb_produk
