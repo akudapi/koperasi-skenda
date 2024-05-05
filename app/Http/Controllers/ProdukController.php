@@ -111,11 +111,12 @@ class ProdukController extends Controller
     }
 
     public function produkdelete(Request $request, $id){
-        $data = Tb_Produk::find($id);
+        $data = Tb_Produk::findOrFail($id);
 
-        if ($data) {
-            $data ->delete();
-        }
+        Tb_Penjualan::where('idProduk', $data->idProduk)->delete();
+
+        $data ->delete();
+
 
         return redirect()->route('produk');
     }
