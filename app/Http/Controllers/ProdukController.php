@@ -49,7 +49,13 @@ class ProdukController extends Controller
             'gambarProduk'      => 'required|mimes:png,jpg,jpeg|max:2048',
         ]);
 
-        if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+        if ($validator->fails()) {
+            // Mengembalikan response JSON dengan pesan kesalahan validasi
+            return response()->json(['errors' => $validator->errors()->all()], 422);
+        }
+    
+
+        // if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
         
         $photo      = $request->file('gambarProduk');
         $filename   = date('Y-m-D').$photo->getClientOriginalName();

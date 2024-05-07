@@ -166,6 +166,35 @@ h4 {
     margin: 50px 0 30px 0;
 }
 
+.popup-btn {
+    background-color: #68b2a0;
+    color: #fff;
+    transition: background-color 0.3s ease;
+    border: none;
+    border-radius: 5px;
+    width: 150px;
+    height: 40px;
+    font-family: "Poppins";
+    font-size: 18px;
+}
+
+.popup-btn:hover {
+    background-color: #53A28E;
+}
+
+.form-label>label{
+    font-size: 20px;
+}
+
+.input-image>input{
+    padding: 2px;
+}
+
+.prd-img-set {
+    width: 100px;
+    height: 100px
+}
+
 .tambah {
     background-color: #68b2a0;
     color: #fff;
@@ -177,7 +206,7 @@ h4 {
 }
 
 .tambah a {
-    color: white;
+    color: #fff;
     font-family: "Poppins";
     font-size: 18px;
 }

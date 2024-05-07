@@ -13,7 +13,84 @@
                 </div>
                 @if(Auth::user()->level === 'admin')
                     <div class="ml-auto">
-                        <button class="tambah"><a href="{{ route("produk.create") }}">Tambah Data</a></button>
+                        {{-- <a href="{{ route("produk.create") }}">Tambah Data</a> --}}
+                        <button type="button" class="popup-btn" data-toggle="modal" data-target="#formTambah">
+                            Tambah Data
+                        </button>
+                    </div>
+
+                    {{-- FORM POPUP TAMBAH DATA --}}
+                    <div class="modal fade" id="formTambah" tabindex="-1" role="dialog" aria-labelledby="modalLabelTambah" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <!-- Header Modal -->
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalLabelTambah">Form Tambah Data Produk</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                      
+                                <!-- Form di dalam Modal -->
+                                <form class="form-data" action="{{ route('produk.store') }}" method="post" enctype="multipart/form-data">
+                                    @csrf   
+                                    <div class="modal-body">
+                                        
+                                        <div class="form-group">
+                                            <label for="namaProduk">Nama Produk:</label>
+                                            <input type="text" class="form-control" id="namaProduk" name="namaProduk" placeholder="Masukan Nama Produk">
+                                            @error('namaProduk')
+                                            <small>{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                        
+                                        <div class="form-group">
+                                            <label for="jenisProduk">Jenis Produk :</label>
+                                            <select class="form-control" name="jenisProduk">
+                                                <option value="#" selected>Pilih Jenis Produk</option>
+                                                <option value="Aksesoris">Aksesoris</option>
+                                                <option value="Alat Tulis">Alat Tulis</option>
+                                                <option value="Seragam">Seragam</option>
+                                            </select>
+                                            @error('jenisProduk')
+                                            <small>{{ $message }}</small>
+                                            @enderror
+                                        </div> 
+                        
+                                        <div class="form-group">
+                                            <label for="hargaProduk">Harga Produk :</label>
+                                            <input type="number" class="form-control" id="hargaProduk" name="hargaProduk" placeholder="Masukan Harga Produk">
+                                                @error('hargaProduk')
+                                                <small>{{ $message }}</small>
+                                                @enderror
+                                        </div>
+                        
+                                        <div class="form-group">
+                                            <label for="stokProduk">Stok Produk :</label>
+                                            <input type="number" class="form-control" id="stokProduk" name="stokProduk" placeholder="Masukan Stok Produk">
+                                                @error('stokProduk')
+                                                <small>{{ $message }}</small>
+                                                @enderror
+                                        </div>
+                        
+                                        <div class="form-group input-image">
+                                            <label for="gambarProduk">Gambar Produk :</label>
+                                            <input type="file" class="form-control" id="gambarProduk" name="gambarProduk">
+                                              @error('gambarProduk')
+                                                  <small>{{ $message }}</small>
+                                              @enderror
+                                        </div>
+                        
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 @endif
             </div>
@@ -76,14 +153,92 @@
                                             <td>{{ $d->jenisProduk }}</td>
                                             <td>Rp. {{ $d->hargaProduk }}</td>
                                             <td>{{ $d->stokProduk }}</td>
-                                                <td><img src="{{ asset('storage/foto-produk/'.$d->gambarProduk ) }}" alt="GAMBAR PRODUK" style="width: 100px;"></td>
+                                            <td><img src="{{ asset('storage/foto-produk/'.$d->gambarProduk ) }}" alt="GAMBAR PRODUK" class="prd-img-set"></td>
                                             @if(Auth::user()->level === 'admin')
                                                 <td>
-                                                    <a href="{{ route('produk.edit',['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a>
+                                                    {{-- <a href="{{ route('produk.edit',['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a> --}}
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formEdit{{ $d->id }}">
+                                                        <i class="fas fa-pen"></i> Edit
+                                                    </button>
+
+                                                    {{-- FORM POPUP EDIT DATA --}}
+                                                    <div class="modal fade" id="formEdit{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabelEdit" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <!-- Header Modal -->
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" style="font-size: 18.26px" id="modalLabelEdit">Form Edit Data Produk</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                      
+                                                                <!-- Form di dalam Modal -->
+                                                                <form class="form-data" action="{{ route('produk.update',['id' => $d->idProduk]) }}" method="post" enctype="multipart/form-data" style="font-size: 22px; text-align:start;">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <div class="modal-body">
+                                                        
+                                                                        <div class="form-group">
+                                                                            <label for="namaProduk">Nama Produk:</label>
+                                                                            <input type="text" class="form-control" id="namaProduk" name="namaProduk" value="{{ $d->namaProduk }}" placeholder="Masukan Nama Produk">
+                                                                                @error('namaProduk')
+                                                                                <small>{{ $message }}</small>
+                                                                                @enderror
+                                                                        </div>
+                                                        
+                                                                        <div class="form-group">
+                                                                            <label for="jenisProduk">Jenis Produk :</label>
+                                                                            <select class="form-control" name="jenisProduk">
+                                                                                <option value="#" selected>Pilih Jenis Produk</option>
+                                                                                <option value="Aksesoris">Aksesoris</option>
+                                                                                <option value="Alat Tulis">Alat Tulis</option>
+                                                                                <option value="Seragam">Seragam</option>
+                                                                            </select>
+                                                                            @error('jenisProduk')
+                                                                            <small>{{ $message }}</small>
+                                                                            @enderror
+                                                                        </div> 
+                                                        
+                                                                        <div class="form-group">
+                                                                            <label for="hargaProduk">Harga Produk :</label>
+                                                                            <input type="number" class="form-control" id="hargaProduk" name="hargaProduk" value="{{ $d->hargaProduk }}" placeholder="Masukan Harga Produk">
+                                                                                @error('hargaProduk')
+                                                                                <small>{{ $message }}</small>
+                                                                                @enderror
+                                                                        </div>
+                                                        
+                                                                        <div class="form-group">
+                                                                            <label for="stokProduk">Stok Produk :</label>
+                                                                            <input type="number" class="form-control" id="stokProduk" name="stokProduk" value="{{ $d->stokProduk }}" placeholder="Masukan Stok Produk">
+                                                                                @error('stokProduk')
+                                                                                <small>{{ $message }}</small>
+                                                                                @enderror
+                                                                        </div>
+                                                        
+                                                                        <div class="form-group input-image">
+                                                                            <label for="gambarProduk">Gambar Produk :</label>
+                                                                            <input type="file" class="form-control" id="gambarProduk" name="gambarProduk">
+                                                                              @error('gambarProduk')
+                                                                                  <small>{{ $message }}</small>
+                                                                              @enderror
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                                    </div>
+                                                        
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {{-- END --}}
                                                     <a data-toggle="modal" data-target="#modal-hapus{{ $d->id }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus</a>
                                                 </td>
                                             @endif
-                                        </tr>                            
+                                        </tr>
                                     </tbody>
 
                                     <div class="modal fade" id="modal-hapus{{ $d->id }}">
@@ -107,9 +262,7 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                        
                                         </div>
-                                        
                                     </div>
                                 @endforeach
 
