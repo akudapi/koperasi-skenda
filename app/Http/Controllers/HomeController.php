@@ -10,15 +10,13 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function dashboard(){
-        return view('index');
-    }
 
-    public function penjualan(){
-        
-        $data = Tb_Penjualan::get();
+        $totalData1 = User::count();
+        $totalData2 = Tb_Produk::count();
+        $totalData3 = Tb_Penjualan::count();
 
-        return view('penjualan', compact('data'));
-        
+        return view('index', compact('totalData1', 'totalData2', 'totalData3'));
+
     }
 
 }

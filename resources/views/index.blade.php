@@ -37,21 +37,29 @@
 
             <main class="main-activity">
 
-                <div class="card-activity">
-                    <div class="icon-activity">
-                        <img src="{{ asset('image/user.png') }}" alt="user">
+                @if(Auth::user()->level === 'admin')
+                    <div class="card-activity">
+                        <div class="icon-activity">
+                            <img src="{{ asset('image/user.png') }}" alt="user">
+                        </div>
+                        <div class="d-flex">
+                            <h2 class="mr-2">( <span>{{ $totalData1 }}</span>  )</h2>
+                            <h2 class="">Data User</h2>
+                        </div>
+                        <div class="button-activity">
+                            <a href="{{ route('user') }}">Buka</a>
+                        </div>
                     </div>
-                    <h2>Data User</h2>
-                    <div class="button-activity">
-                        <a href="{{ route('user') }}">Buka</a>
-                    </div>
-                </div>
+                @endif
 
                 <div class="card-activity">
                     <div class="icon-activity">
                         <img src="{{ asset('image/folder.png') }}" alt="user">
                     </div>
-                    <h2>Data Produk</h2>
+                    <div class="d-flex">
+                        <h2 class="mr-2">( <span>{{ $totalData2 }}</span>  )</h2>
+                        <h2 class="">Data Produk</h2>
+                    </div>
                     <div class="button-activity">
                         <a href="{{ route('produk') }}">Buka</a>
                     </div>
@@ -61,7 +69,10 @@
                     <div class="icon-activity">
                         <img src="{{ asset('image/folder.png') }}" alt="user">
                     </div>
-                    <h2>Data Penjualan</h2>
+                    <div class="d-flex">
+                        <h2 class="mr-2">( <span>{{ $totalData3 }}</span>  )</h2>
+                        <h2 class="">Data Penjualan</h2>
+                    </div>
                     <div class="button-activity">
                         <a href="{{ route('penjualan') }}">Buka</a>
                     </div>

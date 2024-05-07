@@ -63,17 +63,18 @@
             </a>
           </li>
         </ul>
-        
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-item">
-            <a href="{{ route('user') }}" class="nav-link">
-              <i class="nav-icon fa-solid fa-user" style="color: #ffffff;"></i>
-              <p class="poppins paraf">
-                Data User
-              </p>
-            </a>
-          </li>
-        </ul>
+        @if(Auth::user()->level === 'admin')
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+              <a href="{{ route('user') }}" class="nav-link">
+                <i class="nav-icon fa-solid fa-user" style="color: #ffffff;"></i>
+                <p class="poppins paraf">
+                  Data User
+                </p>
+              </a>
+            </li>
+          </ul>
+        @endif
         
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">

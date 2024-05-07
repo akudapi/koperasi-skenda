@@ -10,9 +10,23 @@ use Illuminate\Support\Facades\Validator;
 class PenjualanController extends Controller
 {
     
-    public function penjualan(){
+    public function penjualan(Request $request){
 
-        $data = Tb_Produk::with('penjualan')->get();
+        $search = $request->input('search');
+
+        if ($search) {
+            $data = Tb_Produk::query()
+                ->where('idProduk', 'LIKE', "%{$search}%")
+                ->orWhere('namaProduk', 'LIKE', "%{$search}%")
+                ->orWhere('jenisProduk', 'LIKE', "%{$search}%")
+                ->orWhere('hargaProduk', 'LIKE', "%{$search}%")
+                ->get();
+
+            $isEmpty = $data->isEmpty();
+        } else {
+            $data = Tb_Produk::with('penjualan')->get();
+            $isEmpty = false;
+        }
 
         return view('penjualan', compact('data'));
 
@@ -29,12 +43,16 @@ class PenjualanController extends Controller
             $penjualan = new Tb_Penjualan();
             $penjualan->idProduk = $id;
         }
+        
+        $produk->stokProduk -=$jumlahTerjual;
+        $produk->save();
 
-        $penjualan->terjual = $jumlahTerjual;
+        $penjualan->terjual += $jumlahTerjual;
         $penjualan->save();
 
-        
+
         return redirect()->back()->with('success', 'Jumlah terjual berhasil ditambahkan.');
+
     }
 
 

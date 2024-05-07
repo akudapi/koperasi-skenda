@@ -32,9 +32,6 @@ Route::middleware(['guest'])->group(function(){
 });
 
 
-
-// Route::group(['prefix' => 'admin','middleware' => ['auth'], 'as' => 'admin.'] , function(){
-
 Route::middleware(['auth'])->group(function(){
 
     // ROUTE DASHBOARD/HOME/HALAMAN AWAL

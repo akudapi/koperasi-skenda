@@ -12,24 +12,37 @@ use PhpParser\Node\NullableType;
 
 class ProdukController extends Controller
 {
-    public function produk(){
-        
-        $data = Tb_Produk::get();
+    public function produk(Request $request){
 
-        return view('produk', compact('data'));
+        $search = $request->input('search');
+
+        if ($search) {
+            $data = Tb_Produk::query()
+                ->where('idProduk', 'LIKE', "%{$search}%")
+                ->orWhere('namaProduk', 'LIKE', "%{$search}%")
+                ->orWhere('jenisProduk', 'LIKE', "%{$search}%")
+                ->orWhere('hargaProduk', 'LIKE', "%{$search}%")
+                ->get();
+
+            $isEmpty = $data->isEmpty();
+        } else {
+            $data = Tb_Produk::all();
+            $isEmpty = false;
+        }
+
+        return view('produk', compact('data', 'isEmpty'));
         
     }
 
     public function produkcreate(){
 
         $data = Tb_Produk::get();
-        
         return view('produkCreate',compact('data'));
     }
 
     public function produkstore(Request $request){
         $validator = Validator::make($request->all(),[
-            'namaProduk'        => 'required',
+            'namaProduk'        => 'required|max:250',
             'jenisProduk'       => 'required|in:Aksesoris,Alat Tulis,Seragam',
             'hargaProduk'       => 'required',
             'stokProduk'        => 'required',
@@ -60,14 +73,6 @@ class ProdukController extends Controller
         $penjualan = new Tb_Penjualan();
         $penjualan->idProduk    = $produk->idProduk;
         $penjualan->save();
-
-        // $data['idProduk']           = $idProduk;
-        // $data['namaProduk']         = $request->namaProduk;
-        // $data['jenisProduk']        = $request->jenisProduk;
-        // $data['hargaProduk']        = $request->hargaProduk;
-        // $data['stokProduk']         = $request->stokProduk;
-        // $data['gambarProduk']       = $filename;
-        // Tb_Produk::create($data);
 
         return redirect()->route('produk');
     }
