@@ -53,6 +53,7 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('/penjualan',[PenjualanController::class,'penjualan'])->name('penjualan');
     Route::post('/penjualan/terjual/{id}',[PenjualanController::class,'tambahterjual'])->name('penjualan.terjual');
+    Route::post('/penjualan/kurangi/{id}',[PenjualanController::class,'kurangiterjual'])->name('penjualan.kurangi');
 
     // LOGOUT AKUN
     Route::get('/logout',[LoginController::class,'logout'])->name('logout');

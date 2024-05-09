@@ -16,28 +16,17 @@ class ProdukController extends Controller
 
         $search = $request->input('search');
 
-        if ($search) {
-            $data = Tb_Produk::query()
-                ->where('idProduk', 'LIKE', "%{$search}%")
-                ->orWhere('namaProduk', 'LIKE', "%{$search}%")
-                ->orWhere('jenisProduk', 'LIKE', "%{$search}%")
-                ->orWhere('hargaProduk', 'LIKE', "%{$search}%")
-                ->get();
+        $data = Tb_Produk::with('penjualan')
+            ->when($search, function($query) use ($search) {
+                return $query->where('idProduk', 'LIKE', "%{$search}%")
+                    ->orWhere('namaProduk', 'LIKE', "%{$search}%")
+                    ->orWhere('jenisProduk', 'LIKE', "%{$search}%")
+                    ->orWhere('hargaProduk', 'LIKE', "%{$search}%");
+            })
+            ->paginate(5);
 
-            $isEmpty = $data->isEmpty();
-        } else {
-            $data = Tb_Produk::all();
-            $isEmpty = false;
-        }
-
-        return view('produk', compact('data', 'isEmpty'));
+        return view('produk', compact('data', 'search'));
         
-    }
-
-    public function produkcreate(){
-
-        $data = Tb_Produk::get();
-        return view('produkCreate',compact('data'));
     }
 
     public function produkstore(Request $request){
@@ -49,21 +38,13 @@ class ProdukController extends Controller
             'gambarProduk'      => 'required|mimes:png,jpg,jpeg|max:2048',
         ]);
 
-        if ($validator->fails()) {
-            // Mengembalikan response JSON dengan pesan kesalahan validasi
-            return response()->json(['errors' => $validator->errors()->all()], 422);
-        }
-    
+        if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
-        // if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
-        
         $photo      = $request->file('gambarProduk');
         $filename   = date('Y-m-D').$photo->getClientOriginalName();
         $path       = 'foto-produk/'.$filename;
 
         Storage::disk('public')->put($path,file_get_contents($photo));
-
-        //  Helper::IDGenerator(new ProdukController, 'idProduk', 5, 'PRDK');
 
         $idProduk = Helper::IDGenerator(new Tb_Produk, 'idProduk', 3, 'PRD');
 
@@ -80,13 +61,7 @@ class ProdukController extends Controller
         $penjualan->idProduk    = $produk->idProduk;
         $penjualan->save();
 
-        return redirect()->route('produk');
-    }
-
-    public function produkedit(Request $request, $id){
-        $data = Tb_Produk::find($id);
-
-        return view('produkEdit',compact('data'));
+        return redirect()->back()->with('success', 'Berhasil menambahkan produk.');
     }
 
     public function produkupdate(Request $request, $id){
@@ -118,7 +93,7 @@ class ProdukController extends Controller
 
         Tb_Produk::whereId($id)->update($data);
 
-        return redirect()->route('produk');
+        return redirect()->back()->with('success', 'Berhasil mengedit produk.');
     }
 
     public function produkdelete(Request $request, $id){
@@ -128,8 +103,7 @@ class ProdukController extends Controller
 
         $data ->delete();
 
-
-        return redirect()->route('produk');
+        return redirect()->back()->with('success', 'Berhasil menghapus produk.');
     }
 
 }
