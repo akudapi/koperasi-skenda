@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('jenisProduk', ['Aksesoris','Alat Tulis','Seragam']);
             $table->integer('hargaProduk');
             $table->integer('stokProduk');
-            $table->string('gambarProduk', 250)->nullable();
+            $table->string('gambarProduk', 250);
             $table->timestamps();
         });
     }

@@ -58,7 +58,7 @@ class ProdukController extends Controller
         $produk->save();
 
         $penjualan = new Tb_Penjualan();
-        $penjualan->idProduk    = $produk->idProduk;
+        $penjualan->idProduk = $produk->idProduk;
         $penjualan->save();
 
         return redirect()->back()->with('success', 'Berhasil menambahkan produk.');
@@ -80,16 +80,8 @@ class ProdukController extends Controller
         $data['hargaProduk']        = $request->hargaProduk;
         $data['stokProduk']         = $request->stokProduk;
 
-        if ($request->hasFile('gambarProduk')) {
-            $photo = $request->file('gambarProduk');
-            $filename = date('Y-m-D') . $photo->getClientOriginalName();
-            $path = 'photo-user/' . $filename;
-            Storage::disk('public')->put($path, file_get_contents($photo));
-            $data['gambarProduk'] = $filename;
-        } else {
-            $existingProduct = Tb_Produk::findOrFail($id);
-            $data['gambarProduk'] = $existingProduct->gambarProduk;
-        }
+        $imageDb = Tb_Produk::findOrFail($id);
+        $data['gambarProduk'] = $imageDb->gambarProduk;
 
         Tb_Produk::whereId($id)->update($data);
 

@@ -142,7 +142,7 @@
                                     <th>Stok Produk</th>
                                     <th>Gambar Produk</th>
                                     @if(Auth::user()->level === 'admin')
-                                        <th>Action</th>
+                                        <th style="width: 120px">Action</th>
                                     @endif
                                 </tr>
                             </thead>
@@ -154,11 +154,11 @@
                                         <td class="ovfl-text">{{ $d->namaProduk }}</td>
                                         <td>{{ $d->jenisProduk }}</td>
                                         <td>Rp. {{ $d->hargaProduk }}</td>
-                                        <td class="text-center">{{ $d->stokProduk }}</td>
+                                        <td>{{ $d->stokProduk }}</td>
                                         <td><img src="{{ asset('storage/foto-produk/'.$d->gambarProduk ) }}" alt="GAMBAR PRODUK" class="prd-img-set d-flex m-auto"></td>
                                         @if(Auth::user()->level === 'admin')
                                             <td class="text-center">
-                                                {{-- <a href="{{ route('produk.edit',['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a> --}}
+                                                
                                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formEdit{{ $d->id }}">
                                                     <i class="fas fa-pen"></i>
                                                 </button>
@@ -176,7 +176,7 @@
                                                             </div>
                                                             
                                                             <!-- Form di dalam Modal -->
-                                                            <form class="form-data" action="{{ route('produk.update',['id' => $d->idProduk]) }}" method="post" enctype="multipart/form-data" style="font-size: 22px; text-align:start;">
+                                                            <form class="form-data" action="{{ route('produk.update',['id' => $d->id]) }}" method="post" enctype="multipart/form-data" style="font-size: 22px; text-align:start;">
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <div class="modal-body">

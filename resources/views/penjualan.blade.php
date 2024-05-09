@@ -55,7 +55,7 @@
                                     <th>Jumlah Terjual</th>
                                     <th>Total</th>
                                     @if(Auth::user()->level === 'admin')
-                                        <th >Action</th>
+                                        <th style="width: 100px">Action</th>
                                     @endif
                                 </tr>
                             </thead>
@@ -67,7 +67,7 @@
                                         <td class="ovfl-text">{{ $d->namaProduk }}</td>
                                         <td>{{ $d->stokProduk }}</td>
                                         <td>Rp. {{ $d->hargaProduk }}</td>
-                                        <td>
+                                        <td class="">
                                             @if ($d->penjualan->terjual == null)
                                                 -
                                             @else
