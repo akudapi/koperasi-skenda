@@ -26,7 +26,7 @@ class ProdukController extends Controller
             ->paginate(5);
 
         return view('produk', compact('data', 'search'));
-        
+
     }
 
     public function produkstore(Request $request){
@@ -44,7 +44,7 @@ class ProdukController extends Controller
         $filename   = date('Y-m-D').$photo->getClientOriginalName();
         $path       = 'foto-produk/'.$filename;
 
-        Storage::disk('public')->put($path,file_get_contents($photo));
+        Storage::disk('public')->put($path, file_get_contents($photo));
 
         $idProduk = Helper::IDGenerator(new Tb_Produk, 'idProduk', 3, 'PRD');
 
@@ -57,9 +57,9 @@ class ProdukController extends Controller
         $produk->gambarProduk   = $filename;
         $produk->save();
 
-        $penjualan = new Tb_Penjualan();
-        $penjualan->idProduk = $produk->idProduk;
-        $penjualan->save();
+        // $penjualan = new Tb_Penjualan();
+        // $penjualan->idProduk = $produk->idProduk;
+        // $penjualan->save();
 
         return redirect()->back()->with('success', 'Berhasil menambahkan produk.');
     }
@@ -74,14 +74,27 @@ class ProdukController extends Controller
         ]);
 
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
-        
+
         $data['namaProduk']         = $request->namaProduk;
         $data['jenisProduk']        = $request->jenisProduk;
         $data['hargaProduk']        = $request->hargaProduk;
         $data['stokProduk']         = $request->stokProduk;
 
-        $imageDb = Tb_Produk::findOrFail($id);
-        $data['gambarProduk'] = $imageDb->gambarProduk;
+        // PENGECEKAN DATA
+        if ($request->hasFile('gambarProduk')) {
+            $photo = $request->file('gambarProduk');
+            $filename = date('Y-m-d') . '-' . $photo->getClientOriginalName();
+            $path = 'foto-produk/' . $filename;
+
+            // Simpan gambar ke penyimpanan
+            Storage::disk('public')->put($path, file_get_contents($photo));
+
+            // Set path gambar untuk disimpan ke database
+            $data['gambarProduk'] = $filename;
+        }  else {
+            $imageDb = Tb_Produk::findOrFail($id);
+            $data['gambarProduk'] = $imageDb->gambarProduk;
+        }
 
         Tb_Produk::whereId($id)->update($data);
 

@@ -14,12 +14,13 @@ class Tb_Penjualan extends Model
 
     protected $fillable = [
         "idProduk",
+        "hargaProduk",
         "terjual",
     ];
 
     public function produk()
     {
-        return $this->belongsTo(Tb_Produk::class, 'idProduk', 'idProduk');
+        return $this->belongsTo(Tb_Produk::class, 'idProduk', 'id');
     }
     
 }

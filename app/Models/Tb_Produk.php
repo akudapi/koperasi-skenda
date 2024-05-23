@@ -22,6 +22,6 @@ class Tb_Produk extends Model
 
     public function penjualan()
     {
-        return $this->hasOne(Tb_Penjualan::class,  'idProduk', 'idProduk');
+        return $this->hasMany(Tb_Penjualan::class,  'idProduk', 'id');
     }    
 }

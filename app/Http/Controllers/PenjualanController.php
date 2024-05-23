@@ -5,64 +5,80 @@ namespace App\Http\Controllers;
 use App\Models\Tb_Penjualan;
 use App\Models\Tb_Produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class PenjualanController extends Controller
 {
     
-    public function penjualan(Request $request){
+    public function penjualan(){
+
+        $fungsi = DB::select(
+            'select tb_produk.idProduk, tb_produk.namaProduk
+            FROM tb_produk'
+        );
         
-        $search = $request->input('search');
-    
-        $totalPenuh = Tb_Produk::with('penjualan')
-            ->when($search, function($query) use ($search) {
-                return $query->where('idProduk', 'LIKE', "%{$search}%")
-                    ->orWhere('namaProduk', 'LIKE', "%{$search}%")
-                    ->orWhere('jenisProduk', 'LIKE', "%{$search}%")
-                    ->orWhere('hargaProduk', 'LIKE', "%{$search}%");
-            })
-            ->get()
-            ->sum(function ($produk) {
-                return $produk->hargaProduk * $produk->penjualan->terjual;
-            });
-    
-        $data = Tb_Produk::with('penjualan')
-            ->when($search, function($query) use ($search) {
-                return $query->where('idProduk', 'LIKE', "%{$search}%")
-                    ->orWhere('namaProduk', 'LIKE', "%{$search}%")
-                    ->orWhere('jenisProduk', 'LIKE', "%{$search}%")
-                    ->orWhere('hargaProduk', 'LIKE', "%{$search}%");
-            })
-            ->paginate(5);
-    
-        return view('penjualan', compact('data', 'totalPenuh', 'search'));
+
+        $produk = DB::select(
+            'select tb_produk.idProduk, tb_produk.namaProduk, tb_produk.jenisProduk, tb_produk.stokProduk, tb_produk.hargaProduk, tb_penjualan.id, tb_penjualan.terjual, (tb_penjualan.terjual * tb_produk.hargaProduk) AS totalSatuan
+            FROM tb_produk left JOIN tb_penjualan 
+            on tb_penjualan.idProduk = tb_produk.idProduk
+            where tb_penjualan.terjual is not null;'
+        );
+
+        $totalPenjualan = DB::selectOne(
+            'SELECT SUM(tb_penjualan.terjual * tb_produk.hargaProduk) AS totalPenjualan 
+            from tb_penjualan 
+            JOIN tb_produk ON tb_penjualan.idProduk = tb_produk.idProduk;'
+        )->totalPenjualan;
+
+        $pengurangan = Tb_Produk::with('penjualan')->get();
+
+        return view('penjualan', compact('produk', 'fungsi', 'totalPenjualan'));
+
     }
     
+    public function penjualantambah(Request $request){
 
-    public function tambahterjual(Request $request, $id){
 
-        $produk             = Tb_Produk::findOrFail($id);
-        $jumlahTerjual      = $request->input('jumlah_terjual');
-        $kurangiTerjual     = $request->input('kurangi_terjual');
+        $request->validate([
+            'produk' => 'required',
+            'terjual' => 'required|integer|min:1',
+        ]);
 
-        $penjualan      = $produk->penjualan;
 
-        if (!$penjualan) {
-            $penjualan = new Tb_Penjualan();
-            $penjualan->idProduk = $id;
-        }
-        
-        $produk->stokProduk -= $jumlahTerjual;
-        $produk->save();
+        // untuk mendaapatkan idProduk dari input
+        $idProduk   = $request->produk;
 
-        $penjualan->terjual += $jumlahTerjual;
+        $penjualan = new Tb_Penjualan();
+        $penjualan->idProduk    = $idProduk;
+        $penjualan->terjual     = $request->terjual;
         $penjualan->save();
+
+        $produk     = Tb_Produk::where('idProduk', $idProduk)->first();
+        // dd($produk);
+        $produk->stokProduk -= $request->terjual;
+        $produk->save();
 
         return redirect()->back()->with('success', 'Jumlah terjual berhasil ditambahkan.');
 
     }
 
-    public function kurangiterjual(Request $request, $id){
+    public function penjualankurang(Request $request, $id){
+
+        // $idProduk   = $request->produk;
+        // $produk     = Tb_Produk::with('penjualan')->get();
+        
+        // // input an untuk dikurangi
+        // $kurangiTerjual = $request->input('kurangi_terjual');
+
+        // $produk-> += $kurangiTerjual;
+        // $produk->save();
+
+        // $penjualan = $produk->penjualan;
+        // $penjualan->terjual -= $kurangiTerjual;
+        // $penjualan->save();
 
         $produk             = Tb_Produk::findOrFail($id);
         $kurangiTerjual     = $request->input('kurangi_terjual');
@@ -72,6 +88,7 @@ class PenjualanController extends Controller
         $produk->stokProduk += $kurangiTerjual;
         $produk->save();
 
+        // $penjualan = Tb_Penjualan::findOrFail('idProduk');
         $penjualan->terjual -= $kurangiTerjual;
         $penjualan->save();
 
@@ -79,5 +96,24 @@ class PenjualanController extends Controller
 
     }
 
+    public function penjualandelete($id)
+    {
+        
+        // MENGAMBIL ID PRIMARY KEY UNTUK DELETE DATA
+        $penjualan = Tb_Penjualan::findOrFail($id);
+    
+        // AMBIL DATA SESUAI idProduk YANG DIPILIH
+        $produk = Tb_Produk::where('idProduk', $penjualan->idProduk)->first();
+    
+        // MENAMBAHKAN STOKPRODUK APABILA ADA DATA PENJUALAN YANG DIHAPUS
+        $produk->stokProduk += $penjualan->terjual;
+        $produk->save();
+    
+        // DELETE DATA SESUAI ID PRIMARY KEY YANG DIAMBIL
+        $penjualan->delete();
+        // dd($penjualan);
+    
+        return redirect()->back()->with('success', 'Penjualan berhasil dihapus.');
+    }
 
 }

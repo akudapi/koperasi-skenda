@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\PenjualanController;
@@ -50,10 +51,16 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/produk/store',[ProdukController::class,'produkstore'])->name('produk.store');
     Route::put('/produk/update/{id}', [ProdukController::class, 'produkupdate'])->name('produk.update');
     Route::delete('/produk/delete/{id}', [ProdukController::class, 'produkdelete'])->name('produk.delete');
-
+    
+    // ROUTE UNTUK PENJUALAN
     Route::get('/penjualan',[PenjualanController::class,'penjualan'])->name('penjualan');
-    Route::post('/penjualan/terjual/{id}',[PenjualanController::class,'tambahterjual'])->name('penjualan.terjual');
-    Route::post('/penjualan/kurangi/{id}',[PenjualanController::class,'kurangiterjual'])->name('penjualan.kurangi');
+    Route::post('/penjualan/tambah',[PenjualanController::class,'penjualantambah'])->name('penjualan.tambah');
+    Route::post('/penjualan/kurang/{id}',[PenjualanController::class,'penjualankurang'])->name('penjualan.kurang');
+    Route::delete('/penjualan/delete/{id}',[PenjualanController::class, 'penjualandelete'])->name('penjualan.delete');
+
+    // ROUTE UNTUK LAPORAN
+    Route::get('/laporan',[LaporanController::class, 'laporan'])->name('laporan');
+    Route::get('/laporan/{month}/{year}', [LaporanController::class, 'laporanbulanan'])->name('laporan.bulanan');
 
     // LOGOUT AKUN
     Route::get('/logout',[LoginController::class,'logout'])->name('logout');

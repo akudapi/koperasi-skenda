@@ -46,9 +46,9 @@
                             <h2 class="mr-2">( <span>{{ $totalData1 }}</span>  )</h2>
                             <h2 class="">Data User</h2>
                         </div>
-                        <div class="button-activity">
+                        <button class="btn button-activity">
                             <a href="{{ route('user') }}">Buka</a>
-                        </div>
+                        </button>
                     </div>
                 @endif
 
@@ -60,9 +60,9 @@
                         <h2 class="mr-2">( <span>{{ $totalData2 }}</span>  )</h2>
                         <h2 class="">Data Produk</h2>
                     </div>
-                    <div class="button-activity">
+                    <button class="btn button-activity">
                         <a href="{{ route('produk') }}">Buka</a>
-                    </div>
+                    </button>
                 </div>
 
                 <div class="card-activity">
@@ -73,9 +73,21 @@
                         <h2 class="mr-2">( <span>{{ $totalData3 }}</span>  )</h2>
                         <h2 class="">Data Penjualan</h2>
                     </div>
-                    <div class="button-activity">
+                    <button class="btn button-activity">
                         <a href="{{ route('penjualan') }}">Buka</a>
+                    </button>
+                </div>
+
+                <div class="card-activity">
+                    <div class="icon-activity">
+                        <img src="{{ asset('image/folder.png') }}" alt="user">
                     </div>
+                    <div class="d-flex">
+                        <h2 class="">Laporan Penjualan Bulanan</h2>
+                    </div>
+                    <button class="btn button-activity">
+                        <a href="{{ route('laporan') }}">Buka</a>
+                    </button>
                 </div>
 
                 {{-- <div class="card-activity">

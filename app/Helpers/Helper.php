@@ -7,7 +7,7 @@
         $data = $model::orderBy('id','desc')->first();
         if(!$data){
             $og_length = $length;
-            $last_number = '';
+            $last_number = '1';
         }else{
             $code = substr($data->$trow, strlen($prefix)+1);
             $actial_last_number = ($code/1)*1;
