@@ -61,6 +61,8 @@ Route::middleware(['auth'])->group(function(){
     // ROUTE UNTUK LAPORAN
     Route::get('/laporan',[LaporanController::class, 'laporan'])->name('laporan');
     Route::get('/laporan/{month}/{year}', [LaporanController::class, 'laporanbulanan'])->name('laporan.bulanan');
+    Route::get('/laporan/cetak/{month}/{year}', [LaporanController::class, 'cetak'])->name('cetak');
+
 
     // LOGOUT AKUN
     Route::get('/logout',[LoginController::class,'logout'])->name('logout');

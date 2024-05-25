@@ -67,6 +67,10 @@
                         <div class="mr-auto my-auto">
                             <h3 class="card-title">Total penjualan semua produk: <span style="font-weight: bold">Rp. {{ $totalPenjualan }}</span></h3>
                         </div>
+
+                        <div>
+                            <a href="{{ route('cetak', ['month' => $month, 'year' => $year]) }}" class="btn btn-info" target="_blank">Cetak</a>
+                        </div>
                     </div>
 
             </div>
